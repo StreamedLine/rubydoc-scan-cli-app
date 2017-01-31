@@ -22,4 +22,8 @@ class CommandLineInterface
     #@@data.organize
   end
 
+  def display_data
+    #disply with colorize
+  end
+
 end
