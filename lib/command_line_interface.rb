@@ -6,7 +6,7 @@ class CommandLineInterface
 
   def initialize(keyword)
     @@keyword = keyword
-    @@data = Doc_data.new
+    @@data = Documentation_data.new
   end
 
   def run

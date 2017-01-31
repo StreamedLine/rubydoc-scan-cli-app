@@ -1,0 +1,3 @@
+class Documentation_data
+
+end
