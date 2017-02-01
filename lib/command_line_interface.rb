@@ -10,8 +10,6 @@ class CommandLineInterface
   def run
     collect_doc_refs
     organize_data
-    #dev
-    puts "#{@keyword} in cli class"
   end
 
   def collect_doc_refs
