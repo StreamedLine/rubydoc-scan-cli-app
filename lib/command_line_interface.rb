@@ -25,13 +25,15 @@ class CommandLineInterface
   def display_data
     #disply with colorize
     # binding.pry
+    disp_all = nil
     @data.data[:final].each_with_index do |result, i|
       puts ""
-      puts "#{result[:idx]}. #{result[:text]}\n    #{result[:link]}"
+      puts "#{result[:idx]}. #{result[:text].colorize(:yellow)}\n    #{result[:link].colorize(:light_blue)}"
 
-      if i > 1 and i % 10 == 0
-        puts "press any key to display next 10 results"
-        usr_input = STDIN.gets
+      if i > 1 and i % 10 == 0 
+        puts ""
+        puts "press [any key] to display next 10 results"
+        usr_input = STDIN.gets #why does this work? (and not gets by itself)
       end
     end
 
