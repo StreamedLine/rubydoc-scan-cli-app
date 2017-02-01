@@ -4,17 +4,21 @@ class Documentation_data
   @@history = []
 
   def initialize(word = "")
-    @data = {word: word, raw: nil}
+    @data = {word: word, raw: nil, final: nil}
     @@history << @data
   end
 
   def organize_data
     @data[:raw].sort{|a,b| a.text <=> b.text}
-    @data.each_with_index do |e, i|
-      @data[i.to_sym] = i 
-      @data[:text] = e.text
-      @data[:link] = Scraper.path + '/' + e['href']
+
+    final = @data[:raw].each_with_index.collect do |e, i|
+      organized = {}
+      organized[:idx] = i + 1
+      organized[:text] = e.text
+      organized[:link] = Scraper.path + '/' + e['href']
+      organized
     end
+    @data[:final] = final
     @data
   end
 
