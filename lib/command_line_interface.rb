@@ -16,7 +16,7 @@ class CommandLineInterface
 
   def collect_doc_refs
     #scrape doc for references to keyword
-    Scraper.scrape_the_doc(@keyword )
+    Scraper.scrape_the_doc(@keyword)
   end
 
   def organize_data
