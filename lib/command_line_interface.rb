@@ -11,12 +11,12 @@ class CommandLineInterface
     collect_doc_refs
     organize_data
     #dev
-    puts @keyword
+    puts "#{@keyword} in cli class"
   end
 
   def collect_doc_refs
     #scrape doc for references to keyword
-    Scrape.scrape_the_doc(@keyword)
+    Scraper.scrape_the_doc(@keyword )
   end
 
   def organize_data

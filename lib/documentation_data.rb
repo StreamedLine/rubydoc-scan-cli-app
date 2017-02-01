@@ -1,6 +1,8 @@
 class Documentation_data
   attr_accessor :data
 
+  @@history = []
+
   def initialize(word = "")
     @data = {word: word, raw: []}
     @@history << @data
