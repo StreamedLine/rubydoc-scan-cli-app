@@ -4,7 +4,7 @@ class CommandLineInterface
 
   def initialize(keyword)
     @keyword = keyword
-    @data = Documentation_data.new
+    @data = Documentation_data.new(keyword)
   end
 
   def run
@@ -14,11 +14,11 @@ class CommandLineInterface
 
   def collect_doc_refs
     #scrape doc for references to keyword
-    Scraper.scrape_the_doc(@keyword)
+    @data[:raw] = Scraper.scrape_the_doc(@keyword)
   end
 
   def organize_data
-    #@@data.organize
+    @data.organize_data
   end
 
   def display_data

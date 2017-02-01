@@ -1,7 +1,3 @@
-require 'open-uri'
-require 'nokogiri'
-require 'pry'
-
 class Scraper
   BASE_PATH = "http://ruby-doc.org/core"
 
@@ -17,9 +13,14 @@ class Scraper
 
     results = search_hrefs(hrefs, keyword)
     #dev
-    puts " "
-    results.each{|e| puts "#{e.text}\n   #{BASE_PATH}/#{e['href']}\n-----------"}
+    # puts " "
+    # results.each{|e| puts "#{e.text}\n   #{BASE_PATH}/#{e['href']}\n-----------"}
+    results
   end
+
+  def self.path
+    BASE_PATH
+  end
+  
 end
 
-#hrefs.collect{|e| puts "#{e.text} \n " + "http://ruby-doc.org/core/#{e['href']}"  if e.text.split(" (")[0] == keyword}
