@@ -1,4 +1,3 @@
-require 'nokogiri'
 require 'colorize'
 
 class CommandLineInterface
