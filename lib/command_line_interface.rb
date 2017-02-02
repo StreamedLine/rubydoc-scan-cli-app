@@ -30,13 +30,13 @@ class CommandLineInterface
       puts ""
       puts "#{result[:idx]}. #{result[:text].colorize(:yellow)}\n    #{result[:link].colorize(:light_blue)}"
 
-      if i > 1 and i % 10 == 0 
+      if i > 1 and i % 10 == 0
         puts ""
         puts "press [any key] to display next 10 results"
         usr_input = STDIN.gets #why does this work? (and not gets by itself)
       end
     end
-
+    #Launchy.open(open(STDIN.gets.chomp))
   end
 
 end
