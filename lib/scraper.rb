@@ -16,13 +16,15 @@ class Scraper
   end
 
   def self.scrape_specific_result(link)
+    #DEV
     page = open(link)
     html = Nokogiri::HTML(page)
     result = html.css('a').detect {|n| n['name'] == "#{link.split('#')[1]}"}.parent
     result.css('.method-callseq').each{|e| puts e.inner_text}
-    puts ""
+    puts " "
+    #still missing the blocks of code!
     result.css('p').each{|e| puts e.inner_text}
-    binding.pry
+    puts " "
   end
 
   def self.path

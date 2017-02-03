@@ -52,9 +52,9 @@ class CommandLineInterface
       begin
          Launchy.open(link)
       rescue
-        puts "Couldn't access browser. Link will be copied to clipboard instead."
+        puts "Couldn't access browser. Link will be copied to clipboard instead.".colorize(:red)
         Clipboard.copy(link)
-        puts "#{link} copied to cliboard!"
+        puts "#{link.colorize(:light_blue)} copied to cliboard!"
       end
       true
     else
