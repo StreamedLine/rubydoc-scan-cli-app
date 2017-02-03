@@ -35,7 +35,7 @@ class CommandLineInterface
         puts "press [any key] to display next 10 results"
         usr_input = STDIN.gets.chomp #why does this work? (and not gets by itself)
         if /\d/.match(usr_input)
-          launch_browser(@data.data[:final][usr_input.to_i][:link])
+          launch_browser(@data.data[:final][usr_input.to_i - 1][:link])
           return
         end #--> inner if
       end
@@ -43,7 +43,7 @@ class CommandLineInterface
     usr_input = STDIN.gets.chomp
     if /\d/.match(usr_input)
       launch_browser(@data.data[:final][usr_input.to_i][:link])
-    end 
+    end
   end
 
   def launch_browser(link)
@@ -53,8 +53,6 @@ class CommandLineInterface
       puts "Couldn't access browser. Link will be copied to clipboard instead."
       Clipboard.copy(link)
       puts "#{link} copied to cliboard!"
-    else
-       Launchy.open(link) 
     end
   end
 end
