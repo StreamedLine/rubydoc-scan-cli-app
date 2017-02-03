@@ -28,15 +28,33 @@ class CommandLineInterface
     disp_all = nil
     @data.data[:final].each_with_index do |result, i|
       puts ""
-      puts "#{result[:idx]}. #{result[:text].colorize(:yellow)}\n    #{result[:link].colorize(:light_blue)}"
+      puts "#{result[:idx]}. #{result[:text].colorize(:yellow)}\n#{result[:link].colorize(:light_blue)}"
 
       if i > 1 and i % 10 == 0
         puts ""
         puts "press [any key] to display next 10 results"
-        usr_input = STDIN.gets #why does this work? (and not gets by itself)
+        usr_input = STDIN.gets.chomp #why does this work? (and not gets by itself)
+        if /\d/.match(usr_input)
+          launch_browser(@data.data[:final][usr_input.to_i][:link])
+          return
+        end #--> inner if
       end
     end
-    #Launchy.open(open(STDIN.gets.chomp))
+    usr_input = STDIN.gets.chomp
+    if /\d/.match(usr_input)
+      launch_browser(@data.data[:final][usr_input.to_i][:link])
+    end 
   end
 
+  def launch_browser(link)
+    begin
+       Launchy.open(link)
+    rescue
+      puts "Couldn't access browser. Link will be copied to clipboard instead."
+      Clipboard.copy(link)
+      puts "#{link} copied to cliboard!"
+    else
+       Launchy.open(link) 
+    end
+  end
 end

@@ -18,6 +18,10 @@ class Scraper
     results
   end
 
+  def self.scrape_specific
+
+  end
+
   def self.path
     BASE_PATH
   end
