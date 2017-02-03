@@ -1,5 +1,3 @@
-require 'colorize'
-
 class CommandLineInterface
 
   def initialize(keyword)
@@ -42,7 +40,7 @@ class CommandLineInterface
     end
     usr_input = STDIN.gets.chomp
     if /\d/.match(usr_input)
-      launch_browser(@data.data[:final][usr_input.to_i][:link])
+      launch_browser(@data.data[:final][usr_input.to_i - 1][:link])
     end
   end
 

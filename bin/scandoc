@@ -3,6 +3,7 @@ require 'open-uri'
 require 'nokogiri'
 require 'launchy'
 require 'clipboard'
+require 'colorize'
 require 'pry'
 
 

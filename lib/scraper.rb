@@ -12,14 +12,7 @@ class Scraper
     hrefs = Nokogiri::HTML(page).css("a")
 
     results = search_hrefs(hrefs, keyword)
-    #dev
-    # puts " "
-    # results.each{|e| puts "#{e.text}\n   #{BASE_PATH}/#{e['href']}\n-----------"}
     results
-  end
-
-  def self.scrape_specific
-
   end
 
   def self.path
