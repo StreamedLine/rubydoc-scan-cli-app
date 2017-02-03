@@ -8,7 +8,7 @@ class CommandLineInterface
   def run
     collect_doc_refs
     organize_data
-    display_data
+    display_search_results
   end
 
   def collect_doc_refs
@@ -20,7 +20,7 @@ class CommandLineInterface
     @data.organize_data
   end
 
-  def display_data
+  def display_search_results
     if @data.data[:final].length == 0
       puts "\nSorry, #{@keyword} was not found.\nPress any key to quit."
       STDIN.gets
@@ -32,10 +32,15 @@ class CommandLineInterface
 
       if i > 1 and i % 10 == 0
         puts "\npress [any key] to display next 10 results"
-        launch_browser?
+        #dev
+        launch_browser? ? return : false
       end
     end
-    launch_browser?
+    launch_browser?  ? return : false
+  end
+
+  def display_specific_result(link)
+    Scraper.scrape_specific_result(link)
   end
 
   def launch_browser?
@@ -43,6 +48,7 @@ class CommandLineInterface
     usr_input = STDIN.gets.chomp #why does this work? (and not gets by itself)
     if /\d/.match(usr_input)
       link = @data.data[:final][usr_input.to_i - 1][:link]
+      display_specific_result(link)
       begin
          Launchy.open(link)
       rescue
@@ -50,6 +56,9 @@ class CommandLineInterface
         Clipboard.copy(link)
         puts "#{link} copied to cliboard!"
       end
+      true
+    else
+      false
     end
   end
 
