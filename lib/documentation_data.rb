@@ -1,11 +1,11 @@
 class Documentation_data
-  attr_accessor :data
+  attr_accessor :data, :specific
 
   @@history = []
 
   def initialize(word = "")
     @data = {word: word, raw: nil, final: nil}
-    @@history << @data
+    @specific = {}
   end
 
   def organize_data
@@ -20,6 +20,10 @@ class Documentation_data
     end
     @data[:final] = final
     @data
+  end
+
+  def organize_specific_data
+    #header, blurb, code, link
   end
 
   def self.all
