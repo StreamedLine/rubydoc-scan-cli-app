@@ -1,11 +1,12 @@
 class Documentation_data
-  attr_accessor :data, :specific
+  attr_accessor :data, :selected_link, :specific
 
   @@history = []
 
   def initialize(word = "")
     @data = {word: word, raw: nil, final: nil}
     @specific = {}
+    @selected_link = nil
   end
 
   def organize_data

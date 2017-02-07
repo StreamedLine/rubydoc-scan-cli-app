@@ -8,17 +8,19 @@ class CommandLineInterface
   def run
     collect_doc_refs
     organize_data
-    focus = search_result
     display_search_results
+    display_specific_result
   end
 
-  def smart_input(rule)
+  def smart_input(rules, msg)
+    puts msg
     input = gets.chomp
-    while rule.match(input)
+    while rules.any{|r| r.match(input) != nil}
       if input.upcase == 'Q' or input.upcase == 'QUIT'
         #end program elegently
         exit
       else
+        puts msg
         input = gets.chomp
       end
     end
@@ -46,23 +48,22 @@ class CommandLineInterface
 
       if i > 1 and i % 10 == 0
         puts "\npress [any key] to display next 10 results"
-        #dev
-        launch_browser? ? return : false
+        input = smart_input([/\d/, ""], "\n(enter link number to display expand selected result)")
+        break if input && input != ""
       end
     end
-    launch_browser?  ? return : false
+    if input
+      @data.selected_link = @data.data[:final][usr_input.to_i - 1][:link]
+    end
   end
 
-  def display_specific_result(link)
-    Scraper.scrape_specific_result(link)
+  def display_specific_result
+    @data.selected_link ? Scraper.scrape_specific_result(@data.selected_link) : nil
   end
 
   def launch_browser?
-    puts "\n(enter link number to launch browser)"
-    usr_input = STDIN.gets.chomp #why does this work? (and not gets by itself)
     if /\d/.match(usr_input)
-      link = @data.data[:final][usr_input.to_i - 1][:link]
-      display_specific_result(link)
+      link = @data.selected_link
       begin
          Launchy.open(link)
       rescue
