@@ -46,7 +46,7 @@ class Scraper
     #result.css('.method-callseq').each{|e| puts e.inner_text}
     #still missing the blocks of code!
     result.search('.method-click-advice').each{|e| e.remove}
-    result.search('a').each{|e| e.remove}
+    result.search('div > a').each{|e| e.remove}
 
     puts " "
     result.search('.method-callseq').each do |e|

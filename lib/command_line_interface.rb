@@ -15,14 +15,14 @@ class CommandLineInterface
 
   def smart_input(rules, msg)
     puts msg
-    input = gets.chomp
-    while rules.any{|r| r.match(input) != nil}
+    input = STDIN.gets.chomp
+    while rules.all?{|r| r.match(input) == nil}
       if input.upcase == 'Q' or input.upcase == 'QUIT'
         #end program elegently
         exit
       else
         puts msg
-        input = gets.chomp
+        input = STDIN.gets.chomp
       end
     end
     input
@@ -43,6 +43,7 @@ class CommandLineInterface
       STDIN.gets
       return
     end
+    input = ""
     @data.data[:final].each_with_index do |result, i|
       puts ""
       puts "#{result[:idx]}. #{result[:text].colorize(:yellow)}\n#{result[:link].colorize(:light_blue)}"
@@ -54,7 +55,7 @@ class CommandLineInterface
       end
     end
     if input
-      @data.selected_link = @data.data[:final][usr_input.to_i - 1][:link]
+      @data.selected_link = @data.data[:final][input.to_i - 1][:link]
     end
   end
 
