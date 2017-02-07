@@ -10,6 +10,7 @@ class CommandLineInterface
     organize_data
     display_search_results
     display_specific_result
+    launch_browser?
   end
 
   def smart_input(rules, msg)
@@ -62,8 +63,10 @@ class CommandLineInterface
   end
 
   def launch_browser?
-    if /\d/.match(usr_input)
-      link = @data.selected_link
+    link = @data.selected_link
+    puts "Type b to display in browser or any key to quit"
+    browser = STDIN.gets.chomp
+    if browser.upcase == 'B'
       begin
          Launchy.open(link)
       rescue
@@ -76,5 +79,4 @@ class CommandLineInterface
       false
     end
   end
-
 end
