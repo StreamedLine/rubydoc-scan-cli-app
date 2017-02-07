@@ -8,7 +8,21 @@ class CommandLineInterface
   def run
     collect_doc_refs
     organize_data
+    focus = search_result
     display_search_results
+  end
+
+  def smart_input(rule)
+    input = gets.chomp
+    while rule.match(input)
+      if input.upcase == 'Q' or input.upcase == 'QUIT'
+        #end program elegently
+        exit
+      else
+        input = gets.chomp
+      end
+    end
+    input
   end
 
   def collect_doc_refs
