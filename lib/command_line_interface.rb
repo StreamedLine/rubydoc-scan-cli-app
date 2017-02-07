@@ -7,9 +7,13 @@ class CommandLineInterface
 
   def run
     collect_doc_refs
-    organize_data
+    organize_search_data
     display_search_results
+
+    collect_specific_data
+    organize_specific_data
     display_specific_result
+
     launch_browser?
   end
 
@@ -28,13 +32,15 @@ class CommandLineInterface
     input
   end
 
+  #Step 1
+
   def collect_doc_refs
     #scrape doc for references to keyword
     @data.data[:raw] = Scraper.scrape_the_doc(@keyword)
   end
 
-  def organize_data
-    @data.organize_data
+  def organize_search_data
+    @data.organize_search_data
   end
 
   def display_search_results
@@ -59,9 +65,23 @@ class CommandLineInterface
     end
   end
 
-  def display_specific_result
-    @data.selected_link ? Scraper.scrape_specific_result(@data.selected_link) : nil
+  #Step 2
+
+  def collect_specific_data
+    if @data.selected_link
+      @data.specific = {:raw => Scraper.scrape_specific_result(@data.selected_link)}
+    end
   end
+
+  def organize_specific_data
+    @data.organize_specific_data
+  end
+
+  def display_specific_result
+    #dev
+    puts @data.specific[:colorized]
+  end
+
 
   def launch_browser?
     link = @data.selected_link
