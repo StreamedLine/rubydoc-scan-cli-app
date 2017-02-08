@@ -10,9 +10,7 @@ class Scraper
   def self.scrape_the_doc(keyword)
     page = open(BASE_PATH)
     hrefs = Nokogiri::HTML(page).css("a")
-
     results = search_hrefs(hrefs, keyword)
-    results
   end
 
   def self.traverseIt(chunk)
@@ -20,7 +18,7 @@ class Scraper
     result = ""
     while chunk.next
       if chunk.name == 'div'
-        result += "#{traverseIt(chunk)}\n"
+        result += "#{traverseIt(chunk)}"
         chunk = chunk.next
         next
       end
@@ -33,7 +31,7 @@ class Scraper
           next
         end
         result += "^&*-^BB"
-        result += chunk.inner_text + "\n" if chunk.inner_text && chunk.inner_text != "\n" && chunk.name != 'a'
+        result += chunk.inner_text if chunk.inner_text && chunk.inner_text != "\n" && chunk.name != 'a'
       end
       chunk = chunk.next
     end

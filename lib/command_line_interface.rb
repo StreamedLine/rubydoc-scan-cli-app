@@ -62,6 +62,7 @@ class CommandLineInterface
     end
     if input
       @data.selected_link = @data.data[:final][input.to_i - 1][:link]
+      @data.selected_result_text = @data.data[:final][input.to_i - 1][:text]
     end
   end
 
@@ -79,13 +80,15 @@ class CommandLineInterface
 
   def display_specific_result
     #dev
-    puts @data.specific[:colorized]
+    #puts @data.specific[:colorized].join("\n")
+    puts @data.specific[:blurb]
+    puts @data.specific[:extended]
   end
 
 
   def launch_browser?
     link = @data.selected_link
-    puts "Type b to display in browser or any key to quit"
+    puts "Type b to display in browser or any key to quit".colorize(:color => :cyan)
     browser = STDIN.gets.chomp
     if browser.upcase == 'B'
       begin
