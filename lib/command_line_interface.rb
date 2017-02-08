@@ -56,13 +56,12 @@ class CommandLineInterface
 
       if i > 1 and i % 10 == 0
         puts "\npress [any key] to display next 10 results"
-        input = smart_input([/\d/, ""], "\n(enter link number to display expand selected result)")
+        input = smart_input([/\d/, ""], "\n(enter link number to display result)")
         break if input && input != ""
       end
     end
     if input
-      @data.selected_link = @data.data[:final][input.to_i - 1][:link]
-      @data.selected_result_text = @data.data[:final][input.to_i - 1][:text]
+      @data.add_selected_link_text(input.to_i - 1)
     end
   end
 

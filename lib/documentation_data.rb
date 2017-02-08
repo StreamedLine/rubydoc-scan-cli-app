@@ -9,6 +9,11 @@ class Documentation_data
     @selected_link = nil
   end
 
+  def add_selected_link_text(i)
+    @selected_link = @data[:final][i][:link]
+    @selected_result_text = @data[:final][i][:text]
+  end
+
   def organize_search_data
     @data[:raw].sort{|a,b| a.text <=> b.text}
 
