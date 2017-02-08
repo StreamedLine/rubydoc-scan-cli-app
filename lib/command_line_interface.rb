@@ -55,14 +55,15 @@ class CommandLineInterface
       puts "#{result[:idx]}. #{result[:text].colorize(:yellow)}\n#{result[:link].colorize(:light_blue)}"
 
       if i > 1 and i % 10 == 0
-        puts "\npress [any key] to display next 10 results"
-        input = smart_input([/\d/, ""], "\n(enter link number to display result)")
+        input = smart_input([/\d/, ""], "\npress [any key] to display next 10 results\n\n(enter link number to display result)")
         break if input && input != ""
       end
     end
-    if input
-      @data.add_selected_link_text(input.to_i - 1)
+    if !input or input == ""
+      input = smart_input([/\d/], "\nenter link number to display result or 'q' to quit")
     end
+    exit unless input.to_i.between?(1, @data.data[:final].count)
+    @data.add_selected_link_text(input.to_i - 1)
   end
 
   #Step 2
@@ -76,8 +77,6 @@ class CommandLineInterface
   end
 
   def display_specific_result
-    #dev
-    #puts @data.specific[:colorized].join("\n")
     puts @data.specific[:blurb]
     puts @data.specific[:extended]
   end
