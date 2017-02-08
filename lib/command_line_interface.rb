@@ -6,15 +6,15 @@ class CommandLineInterface
   end
 
   def run
-    collect_doc_refs
-    organize_search_data
-    display_search_results
+    collect_doc_refs #searches the doc/core
+    organize_search_data #puts it into objects and sorts them
+    display_search_results #displays 10 at a time
 
-    collect_specific_data
-    organize_specific_data
-    display_specific_result
+    collect_specific_data #collects user specified data
+    organize_specific_data #organizes it into objects
+    display_specific_result #displays data
 
-    launch_browser?
+    launch_browser? #optional browser launch with cliboard copy as fallback
   end
 
   def smart_input(rules, msg)
@@ -68,9 +68,7 @@ class CommandLineInterface
   #Step 2
 
   def collect_specific_data
-    if @data.selected_link
-      @data.specific = {:raw => Scraper.scrape_specific_result(@data.selected_link)}
-    end
+    @data.add_raw_specific_data
   end
 
   def organize_specific_data
