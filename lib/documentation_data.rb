@@ -1,12 +1,13 @@
 class Documentation_data
   attr_accessor :data, :selected_result_text, :selected_link, :specific
 
-  #@@history = []
+  @@history = []
 
   def initialize(word = "")
     @data = {word: word, raw: nil, final: nil}
     @specific = {raw: nil}
     @selected_link = nil
+    @@history << self
   end
 
   def add_selected_link_text(i)
@@ -65,7 +66,7 @@ class Documentation_data
     end
   end
 
-  # def self.all
-  #   @@history
-  # end
+  def self.all
+    @@history
+  end
 end

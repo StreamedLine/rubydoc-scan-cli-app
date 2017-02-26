@@ -85,7 +85,7 @@ class CommandLineInterface
 
   def launch_browser?
     link = @data.selected_link
-    puts "Type B to display in browser or any key to quit (you can also enter a new keyword if you'd like to search for something else)".colorize(:color => :cyan)
+    puts "Type 'B' to display in browser. Enter a new keyword for new search. 'H' for history. Enter or 'Q' to quit.".colorize(:color => :cyan)
     input = STDIN.gets.chomp
     upInput = input.upcase
     case upInput
@@ -97,7 +97,9 @@ class CommandLineInterface
         Clipboard.copy(link)
         puts "#{link.colorize(:light_blue)} copied to cliboard!"
       end
-    when ""
+    when 'H'
+      puts "history"
+    when "", "Q"
       exit
     else
       Start_program.run(input)
