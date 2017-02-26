@@ -98,7 +98,12 @@ class CommandLineInterface
         puts "#{link.colorize(:light_blue)} copied to cliboard!"
       end
     when 'H'
-      puts "history"
+      @data.class.all.each.with_index(1){|search, i| puts "#{i}. #{search.data[:word]}"}
+      histo_search = -1
+      while !histo_search.between?(0, @data.class.all.count-1)
+        histo_search = smart_input([/\d/], "Type number to redo search. 'q' to quit.").to_i - 1
+      end
+      Start_program.run(@data.class.all[histo_search].data[:word])
     when "", "Q"
       exit
     else
