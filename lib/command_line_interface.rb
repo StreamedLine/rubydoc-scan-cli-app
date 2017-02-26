@@ -87,7 +87,8 @@ class CommandLineInterface
     link = @data.selected_link
     puts "Type B to display in browser or any key to quit (you can also enter a new keyword if you'd like to search for something else)".colorize(:color => :cyan)
     input = STDIN.gets.chomp
-    case input.upcase
+    upInput = input.upcase
+    case upInput
     when 'B'
       begin
          Launchy.open(link)
