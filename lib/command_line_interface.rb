@@ -45,9 +45,10 @@ class CommandLineInterface
 
   def display_search_results
     if @data.data[:final].length == 0
-      puts "\nSorry, #{@keyword} was not found.\nPress any key to quit."
-      STDIN.gets
-      return
+      puts "\nSorry, #{@keyword} was not found.\nSearch for a new keyword or press any key to quit."
+      input = STDIN.gets.chomp
+      Start_program.run(input) if input != ""
+      exit
     end
     input = ""
     @data.data[:final].each_with_index do |result, i|
