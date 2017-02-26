@@ -87,7 +87,8 @@ class CommandLineInterface
     link = @data.selected_link
     puts "Type b to display in browser or any key to quit".colorize(:color => :cyan)
     browser = STDIN.gets.chomp
-    if browser.upcase == 'B'
+    case browser.upcase
+    when 'B'
       begin
          Launchy.open(link)
       rescue
@@ -95,9 +96,10 @@ class CommandLineInterface
         Clipboard.copy(link)
         puts "#{link.colorize(:light_blue)} copied to cliboard!"
       end
-      true
+    when ""
+      exit
     else
-      false
+      Start_program.run(input)
     end
   end
 end
